@@ -14,18 +14,66 @@
             canvas = document.getElementById('gameCanvas');
             canvasContext = canvas.getContext('2d');
 
-
+            document.addEventListener('keydown', keyPressed);
+            document.addEventListener('keyup', keyReleased);
+            
             setInterval(mainLoop, 1000 / 50);
         }
 
-
+        
+        // player variables
+        var playerXpos = 0;
+        var playerYpos = 380;
+        var playerSize = 20;
+        var playerXspeed = 2;
+        var playerYspeed = 2;
+        
+        var rightKeyPressed = false;
+        var leftKeyPressed = false;
+        const RIGHT_KEY = 39;
+        const LEFT_KEY = 37;
+        
        
         function mainLoop() { // loop runs code 50 times per second
             colorRect(0, 0, canvas.width, canvas.height, 'black'); //bg
-            colorRect(0, 0, 30, 30, 'red'); // player
+            colorRect(playerXpos, playerYpos, playerSize, playerSize, 'red'); // player
+            
+            playerMove() // player move
 
         }
+        
+        function keyPressed(evt){
+            if(evt.keyCode == LEFT_KEY){
+               leftKeyPressed = true;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+               rightKeyPressed = true;
+            }
+        }
+        
+         
+        
+        function keyReleased(evt){
+            if(evt.keyCode == LEFT_KEY){
+               leftKeyPressed = false;
+            }
+            if(evt.keyCode == RIGHT_KEY){
+               rightKeyPressed = false;
+            }
+        }
+        
+         
+        function playerMove(){
+            if(rightKeyPressed){
+                playerXpos += playerXspeed
+            }
+            
+            if(leftKeyPressed){
+                playerXpos -= playerXspeed
+            }
 
+        }
+        
         //func to draw color rects on canvas
         function colorRect(x, y, w, h, c) {
             canvasContext.fillStyle = c;
