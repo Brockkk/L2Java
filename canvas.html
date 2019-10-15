@@ -28,6 +28,12 @@
         var playerXspeed = 2;
         var playerYspeed = 2;
         
+        // kunai variables
+        var kunaiXsize = 10;
+        var kunaiYsize = 25;
+        
+        
+        
         var rightKeyPressed = false;
         var leftKeyPressed = false;
         const RIGHT_KEY = 39;
@@ -37,7 +43,7 @@
         function mainLoop() { // loop runs code 50 times per second
             colorRect(0, 0, canvas.width, canvas.height, 'black'); //bg
             colorRect(playerXpos, playerYpos, playerSize, playerSize, 'red'); // player
-            
+            colorRect(0, 0, kunaiXsize, kunaiYsize, 'blue') // knife
             playerMove() // player move
 
         }
@@ -64,11 +70,11 @@
         
          
         function playerMove(){
-            if(rightKeyPressed){
+            if(rightKeyPressed && playerXpos < canvas.width - playerSize){
                 playerXpos += playerXspeed
             }
             
-            if(leftKeyPressed){
+            if(leftKeyPressed && playerXpos >  0){
                 playerXpos -= playerXspeed
             }
 
