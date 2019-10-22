@@ -25,12 +25,16 @@
         var playerXpos = 0;
         var playerYpos = 380;
         var playerSize = 20;
-        var playerXspeed = 2;
+        var playerXspeed = 5;
         var playerYspeed = 2;
         
         // kunai variables
+        var kunaiXspeed = 10;
+        var kunaiYspeed = 7;
         var kunaiXsize = 10;
         var kunaiYsize = 25;
+        var kunaiXpos = 10;
+        var kunaiYpos= 10;
         
         
         
@@ -43,8 +47,9 @@
         function mainLoop() { // loop runs code 50 times per second
             colorRect(0, 0, canvas.width, canvas.height, 'black'); //bg
             colorRect(playerXpos, playerYpos, playerSize, playerSize, 'red'); // player
-            colorRect(0, 0, kunaiXsize, kunaiYsize, 'blue') // knife
+            colorRect(kunaiXpos, kunaiYpos, kunaiXsize, kunaiYsize, 'blue') // knife
             playerMove() // player move
+            kunaiMove() // kunai move
 
         }
         
@@ -85,6 +90,17 @@
             canvasContext.fillStyle = c;
             canvasContext.fillRect(x, y, w, h);
         }
+        
+        function kunaiMove(){
+            kunaiYpos += kunaiYspeed;
+            if(kunaiYpos > canvas.height){
+                kunaiYpos = 0 - kunaiYsize;
+                kunaiXpos = Math.floor(Math.random()*(canvas.width - kunaiXsize));
+            }
+            if(kunaiYpos + kunaiYsize > playerYpos && kunaiXpos + kunaiXspeed > playerXpos && kunaiXpos < playerXpos + playerSize){
+                playerXpos = 0;
+            }
+            }
 
     </script>
 
